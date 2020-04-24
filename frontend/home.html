@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./style/bootstrap.simplified.css">
+<link rel="stylesheet" href="./style/custom.css">
+
+
+<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+
+
+
+<!-- <script src="../script/customScript.js"></script> -->
+
+
+
+<body>
+
+    <!-- Navbar on big screen -->
+    <div class="top">
+        <div class="bar green card left-align large">
+            <a class="bar-item button hide-medium hide-large right padding-large hover-white large green" href="javascript:void(0);" onclick="toggleNavbar()" title="Toggle Navigation Bar">≡</a>
+            <a href="#" class="bar-item button padding-large white"><img src="./img/home.png" height="20" width="20"></a>
+            <a href="dashboard.html" class="bar-item button hide-small padding-large hover-white">Dashboards</a>
+            <a href="plants.html" class="bar-item button hide-small padding-large hover-white">Plants</a>
+            <a href="devices.html" class="bar-item button hide-small padding-large hover-white">Devices</a>
+            <a href="rules.html" class="bar-item button hide-small padding-large hover-white">Rules</a>
+            <a href="login.html" class="bar-item button padding-large hover-white right">Login</a>
+        </div>
+
+        <!-- Navbar on small screens -->
+        <div id="navBar" class="bar-block white hide hide-large hide-medium large">
+            <a href="dashboard.html" class="bar-item button padding-large">Dashboards</a>
+            <a href="plants.html" class="bar-item button padding-large">Plants</a>
+            <a href="devices.html" class="bar-item button padding-large">Devices</a>
+            <a href="rules.html" class="bar-item button padding-large">Rules</a>
+        </div>
+    </div>
+
+    <!-- banner -->
+    <header class="container light-green center" style="padding:128px 16px">
+        <h1 class="margin jumbo">Plant Monitoring System</h1>
+        <button class="button pale-green padding-large large margin-top">Get Started</button>
+    </header>
+
+
+    <div class="page-content">
+        <!-- First Grid -->
+
+        <div class="row-padding padding-64 container">
+            <div class="content">
+                <div class="twothird">
+                    <h1>Lorem Ipsum</h1>
+                    <h5 class="padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+
+                    <p class="text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <div class="third center">
+                    <img src="./img/robot-watering.png" height="200" width="200">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Second Grid -->
+        <div class="row-padding light-grey padding-64 container">
+            <div class="content">
+                <div class="third center">
+                    <img src="./img/robot-watering.png" height="200" width="200">
+                </div>
+
+                <div class="twothird">
+                    <h1>Lorem Ipsum</h1>
+                    <h5 class="padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+
+                    <p class="text-grey">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat
+                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="container padding-64 center opacity">
+        Team 10
+    </footer>
+
+    <script>
+        // toggle menu on
+        function toggleNavbar() {
+            var x = document.getElementById("navBar");
+            if (x.className.indexOf("show") == -1) {
+                x.className += " show";
+            } else {
+                x.className = x.className.replace(" show", "");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chart.js Redraw Example</title>
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/chart.js/dist/Chart.min.js"></script>
+
+    <body>
+        <div style="width:75%;">
+            <canvas id="canvas"></canvas>
+        </div>
+        <br>
+        <br>
+        <button id="randomizeData">Randomize Data</button>
+        <button id="addDataset">Add Dataset</button>
+        <button id="removeDataset">Remove Dataset</button>
+        <button id="addData">Add Data</button>
+        <button id="removeData">Remove Data</button>
+
+    </body>
+
+    <script>
+        var time = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+        var humidity = temp = lux = moist = 0;
+
+
+        var fetchedData = {
+            "data": {
+                "humidity": 43.2,
+                "lux": 329,
+                "moisture": 6.1,
+                "temperature": 19.3
+            },
+            "device": "3456-1346-4535-6532",
+            "ts": 1587479991
+        };
+
+        function convertTs(ts) {
+            var date = new Date(ts * 1000);
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+
+            var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+            console.log(formattedTime);
+            return formattedTime;
+        }
+
+        function getHumidity() {
+            console.log(fetchedData.data.humidity);
+            return fetchedData.data.humidity;
+        }
+
+        function getLux() {
+            console.log(fetchedData.data.lux);
+            return fetchedData.data.lux;
+        }
+
+        function getMoist() {
+            console.log(fetchedData.data.moisture);
+            return fetchedData.data.moisture;
+        }
+
+        function getTemp() {
+            console.log(fetchedData.data.temperature);
+            return fetchedData.data.temperature;
+        }
+
+        function getTimestamp() {
+            console.log(fetchedData.ts);
+            return fetchedData.ts;
+        }
+
+
+
+
+        var theData = {
+            labels: time,
+            datasets: [{
+                label: 'current temperature',
+                data: time,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86,0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)',
+                    'rgba(255, 159, 64, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        }
+
+
+        var config = {
+            type: 'line',
+            data: theData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                title: {
+                    display: true,
+                    text: 'Chart.js Line Chart'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Month'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Value'
+                        }
+                    }]
+                }
+            }
+        };
+        var x = 1;
+
+        function addDummyData() {
+
+            time.push(x);
+            time.shift();
+            x = Math.floor(Math.random() * 10);
+            myLine.update();
+
+        }
+
+        window.onload = function() {
+            var ctx = document.getElementById('canvas').getContext('2d');
+            window.myLine = new Chart(ctx, config);
+            window.setInterval(addDummyData, 1000);
+
+        };
+
+
+        document.getElementById('addData').addEventListener('click', function() {
+            if (config.data.datasets.length > 0) {
+                var month = MONTHS[config.data.labels.length % MONTHS.length];
+                config.data.labels.push(month);
+
+                config.data.datasets.forEach(function(dataset) {
+                    dataset.data.push(randomScalingFactor());
+                });
+
+                myLine.update();
+            }
+        });
+
+        document.getElementById('removeDataset').addEventListener('click', function() {
+            config.data.datasets.splice(0, 1);
+            myLine.update();
+        });
+
+        document.getElementById('removeData').addEventListener('click', function() {
+            config.data.labels.splice(-1, 1); // remove the label first
+
+            config.data.datasets.forEach(function(dataset) {
+                dataset.data.pop();
+            });
+
+            myLine.update();
+        });
+    </script>
+
+</html>

@@ -1,0 +1,21 @@
+before_script:
+  - apt-get update -qq
+  - apt-get install -qq git
+  # Setup SSH deploy keys
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+stages:
+    - deploy
+build:
+  stage: deploy
+  environment: 
+    name: lxfarm_sgonewma
+    url: lxfarm08.csc.liv.uk
+  script:
+    ssh sgonewma@lxfarm08.csc.liv.ac.uk "cd public_html && git checkout master && git pull origin master && exit"
+  only:
+    - master
